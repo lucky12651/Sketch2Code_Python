@@ -16,3 +16,11 @@ def index():
             image.save(filepath)
             image = cv2.imread(filepath)
             flash('Generated Successfully!', 'success')
+def sort_detection_list(detection_list, filename, filenames):
+    size = len(detection_list)
+    for i in range(size):
+        min_index = i
+        for j in range(i + 1, size):
+            if detection_list[min_index]["ymin"] > detection_list[j]["ymin"] and detection_list[min_index]["xmin"] > detection_list[j]["xmin"]:
+                min_index = j
+    detection_list[i], detection_list[min_index] = detection_list[min_index], detection_list[i]
